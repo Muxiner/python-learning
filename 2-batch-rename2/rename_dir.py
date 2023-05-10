@@ -6,10 +6,11 @@ image_formats = ['JPG', 'JPEG', 'PNG', 'GIF', 'BMP', 'TIFF', 'WEBP', 'HEIC', 'jp
 def list_dir(dir_path):
     try:
         dirs_list = [os.path.join(dir_path, dir_item) for dir_item in os.listdir(dir_path) if os.path.isdir(os.path.join(dir_path, dir_item))]
+        file_list = [os.path.join(dir_path, file_item) for file_item in os.listdir(dir_path) if os.path.isfile(os.path.join(dir_path, file_item))]
         if len(dirs_list) > 0:
             for dir_item in dirs_list:
                 list_dir(dir_item)
-        else:
+        if len(file_list) > 0:
             rename_files(dir_path)
 
     except OSError as os_error:
@@ -28,7 +29,7 @@ def rename_files(dir_path):
         digits = len(str(file_count))
 
         file_count = 0
-        prefix = "IMG"
+        prefix = "IMGG"
         # 遍历目录中的每个文件，生成新的文件名并进行重命名操作
         for i, filename in enumerate(files):
             # print(filename)
